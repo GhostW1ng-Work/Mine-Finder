@@ -23,7 +23,7 @@ public class DoorsMoving : MonoBehaviour
         if(other.TryGetComponent(out Player player))
         {
             _door1.transform.DOLocalMoveX(0, 2);
-            _door1.transform.DOLocalMoveX(-1, 2);
+            _door2.transform.DOLocalMoveX(-1, 2);
         }
     }
 }
