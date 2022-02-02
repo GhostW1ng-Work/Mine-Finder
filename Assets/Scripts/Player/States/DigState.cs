@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DigState : State
 {
-    [SerializeField] private float _digCount;
+    [SerializeField] private int _digCount;
+
+    private bool _isDiged;
+
+    public bool IsDiged => _isDiged;
+
+    public event UnityAction Diged;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,6 +33,7 @@ public class DigState : State
     private IEnumerator Dig(Ore ore)
     {
         Animator.SetBool("isDig", true);
+        Diged?.Invoke();
         yield return new WaitForSeconds(_digCount);
         ore.gameObject.SetActive(false);
         Animator.SetBool("isDig", false);
